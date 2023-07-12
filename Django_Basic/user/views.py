@@ -63,3 +63,8 @@ def home(request):
         fcuser = FcUser.objects.get(pk=user_id)
         return HttpResponse(fcuser.user_name)
     return HttpResponse("<h1>Home</h1>")
+
+def logout(request):
+    if request.session.get('user'):
+        del(request.session['user'])
+    return redirect('/')
