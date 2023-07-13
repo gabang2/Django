@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %} 게시판 목록 {% endblock %}
+
+{% block contents %}
+<div class="row mt-5">
+    <div class="col-12">
+        <table class="table table-light">
+            <thead class="thead-light">
+                <tr>
+                    <th>#</th>
+                    <th>제목</th>
+                    <th>아이디</th>
+                    <th>일시</th>
+                </tr>
+            </thead>
+            {% for board in boards %}
+            <tbody class="text-dark">
+                <tr>
+                    <th>{{ forloop.counter }}</th>
+                    <th>{{ board.title }}</th>
+                    <th>{{ board.writer.user_name }}</th>
+                    <td>{{ board.registered_dttm }}</td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <button class="btn btn-primary">글쓰기</button>
+    </div>
+</div>
+
+{% endblock %}
