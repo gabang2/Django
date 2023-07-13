@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %} 게시글 디테일 {% endblock %}
+
+{% block contents %}
+    <div class="row mt-5">
+        <div class="col-12">
+                    <div class="form-group">
+                        <label for="title">글 제목</label>
+                        <input type="text" class="form-control" id="title" placeholder="글 제목" name="title" value="{{ board.title }}" readonly/>
+                        <label for="contents">글 내용</label>
+                        <textarea class="form-control" name="contents" placeholder="글 내용" readonly>{{ board.contents }}</textarea>
+                    </div>
+            <button class="btn btn-primary">돌아가기</button>
+        </div>
+    </div>
+
+{% endblock %}
