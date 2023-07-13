@@ -18,7 +18,7 @@
             <tbody class="text-dark">
                 <tr>
                     <th>{{ forloop.counter }}</th>
-                    <th>{{ board.title }}</th>
+                    <th><a href="/board/{{ board.pk }}">{{ board.title }}</a></th>
                     <th>{{ board.writer.user_name }}</th>
                     <td>{{ board.registered_dttm }}</td>
                 </tr>
@@ -30,7 +30,7 @@
 
 <div class="row">
     <div class="col-12">
-        <button class="btn btn-primary">글쓰기</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='{% url "board:board_write" %}'">글쓰기</button>
     </div>
 </div>
 

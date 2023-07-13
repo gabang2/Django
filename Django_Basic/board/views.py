@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -12,8 +13,10 @@ def board_list(request):
 
 
 def board_detail(request, pk):
-    board = Board.objects.get(pk=pk)
-
+    try:
+        board = Board.objects.get(pk=pk)
+    except Board.DoesNotExist:
+        raise Http404("게시글을 찾을 수 없습니다.")
     return render(request, "board_detail.html", {"board": board})
 
 
@@ -21,7 +24,10 @@ def board_write(request):
     if request.method == "POST":
         form = BoardForm(request.POST)
         if form.is_valid():
-            user_id = request.session["user"]
+            try:
+                user_id = request.session["user"]
+            except:
+                return redirect("/user/login")
             fcuser = FcUser.objects.get(pk=user_id)
             board = Board()
             board.title = form.cleaned_data["title"]

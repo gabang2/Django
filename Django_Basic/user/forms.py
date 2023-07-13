@@ -14,12 +14,17 @@ class LoginForm(forms.Form):
                                    "required": "사용자 비밀번호를 입력해주세요."
                                })
 
+    # 예외 처리 할 것 - 없는 사용자를 검색할 경우
     def clean(self):
         cleaned_data = super().clean()
         user_name = cleaned_data.get("user_name")
         password = cleaned_data.get("password")
         if user_name and password:
-            fcuser = FcUser.objects.get(user_name=user_name)
+            try:
+                fcuser = FcUser.objects.get(user_name=user_name)
+            except FcUser.DoesNotExist:
+                self.add_error("user_name", "사용자가 없습니다.")
+                return
             if not check_password(password, fcuser.password):  # 비밀번호가 일치하는지 확인
                 self.add_error("password", "비밀번호를 틀렸습니다.")  # password field에 error를 넣는 함수
             else:
