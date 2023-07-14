@@ -1,0 +1,1 @@
+- Django Basic 과정 완료 - [웹페이지 바로가기👈](http://gabang2.pythonanywhere.com/)
