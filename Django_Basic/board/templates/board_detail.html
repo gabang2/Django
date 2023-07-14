@@ -10,6 +10,9 @@
                         <input type="text" class="form-control" id="title" placeholder="글 제목" name="title" value="{{ board.title }}" readonly/>
                         <label for="contents">글 내용</label>
                         <textarea class="form-control" name="contents" placeholder="글 내용" readonly>{{ board.contents }}</textarea>
+                        <label for="tag">태그</label>
+                        <input type="text" class="form-control" id="tag" placeholder="태그" name="tag" value="{{ board.tags.all|join:", " }}" readonly/>
+
                     </div>
             <button type="button" class="btn btn-primary" onclick="location.href='/board/'">돌아가기</button>
         </div>

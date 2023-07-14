@@ -7,6 +7,7 @@ class Board(models.Model):
     contents = models.TextField(verbose_name="글 내용")
     writer = models.ForeignKey('user.FcUser', on_delete=models.CASCADE,
                                verbose_name="글 작성자")  # on_delete=models.CASECASE : user가 없어지면 이와 관련된 모든 것을 지움
+    tags = models.ManyToManyField('tag.Tag', verbose_name="태그")
     registered_dttm = models.DateTimeField(auto_now_add=True, verbose_name="등록 시간")
 
     def __str__(self):
