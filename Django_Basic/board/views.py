@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.http import Http404
 from django.shortcuts import render, redirect
 
@@ -8,7 +9,10 @@ from user.models import FcUser
 
 
 def board_list(request):
-    boards = Board.objects.all().order_by('-id')
+    all_boards = Board.objects.all().order_by('-id')
+    page = request.GET.get("p", 1)
+    paginator = Paginator(all_boards, 2)
+    boards = paginator.get_page(page)
     return render(request, "board_list.html", {"boards": boards})
 
 
