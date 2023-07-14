@@ -16,9 +16,9 @@
             </thead>
             {% for board in boards %}
             <tbody class="text-dark">
-                <tr>
+                <tr onclick="location.href='/board/{{ board.pk }}'">
                     <th>{{ forloop.counter }}</th>
-                    <th><a href="/board/{{ board.pk }}">{{ board.title }}</a></th>
+                    <th>{{ board.title }}</th>
                     <th>{{ board.writer.user_name }}</th>
                     <td>{{ board.registered_dttm }}</td>
                 </tr>
