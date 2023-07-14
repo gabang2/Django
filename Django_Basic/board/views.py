@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from board.forms import BoardForm
 from board.models import Board
+from tag.models import Tag
 from user.models import FcUser
 
 
@@ -38,6 +39,13 @@ def board_write(request):
             board.contents = form.cleaned_data["contents"]
             board.writer = fcuser
             board.save()
+
+            tags = form.cleaned_data["tags"].split(',')
+            for tag in tags:
+                if not tag:
+                    continue
+                _tag, created = Tag.objects.get_or_create(name=tag) #_tag는 만들어진 tag인스턴스, created는 새로 생성 여부
+                board.tags.add(_tag)
             return redirect("/board/")
     elif request.method == "GET":
         form = BoardForm()
